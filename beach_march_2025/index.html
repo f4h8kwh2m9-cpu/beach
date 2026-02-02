@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>💖</title>
+    <style>
+      :root {
+        color-scheme: light;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        font-family: "Helvetica Neue", Arial, sans-serif;
+      }
+
+      .box {
+        position: relative;
+        background: white;
+        padding: 40px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        min-width: 320px;
+        min-height: 220px;
+      }
+
+      h1 {
+        margin: 0 0 20px;
+      }
+
+      button {
+        padding: 12px 25px;
+        font-size: 18px;
+        border-radius: 25px;
+        border: none;
+        cursor: pointer;
+        margin: 10px;
+        transition: transform 0.15s ease;
+      }
+
+      button:active {
+        transform: scale(0.97);
+      }
+
+      #yes {
+        background: #ff4d6d;
+        color: white;
+      }
+
+      #no {
+        background: #adb5bd;
+        color: white;
+        position: absolute;
+      }
+
+      #msg {
+        font-size: 20px;
+        margin-top: 20px;
+      }
+
+      #celebrate {
+        margin-top: 18px;
+        width: 240px;
+        max-width: 100%;
+        border-radius: 12px;
+        display: none;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #access-denied {
+        font-size: 28px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="access-denied" hidden>👀 Access denied</div>
+    <div id="app" class="box" hidden>
+      <h1>Will you be my Valentine? 💕</h1>
+      <button id="yes">Yes 💖</button>
+      <button id="no">No 💔</button>
+      <p id="msg"></p>
+      <img
+        id="celebrate"
+        src="yess-yes.gif"
+        alt="Yesssss celebration"
+      />
+    </div>
+
+    <script>
+      const PASSWORD = "ShreyaIsMyValentine2026";
+      const input = prompt("Enter the secret code 💌");
+
+      const accessDenied = document.getElementById("access-denied");
+      const app = document.getElementById("app");
+
+      if (input !== PASSWORD) {
+        accessDenied.hidden = false;
+      } else {
+        app.hidden = false;
+
+        const noBtn = document.getElementById("no");
+        const yesBtn = document.getElementById("yes");
+        const msg = document.getElementById("msg");
+        const celebrate = document.getElementById("celebrate");
+
+        function moveNo() {
+          const boxRect = app.getBoundingClientRect();
+          const buttonRect = noBtn.getBoundingClientRect();
+
+          const maxX = Math.max(0, boxRect.width - buttonRect.width - 10);
+          const maxY = Math.max(0, boxRect.height - buttonRect.height - 10);
+
+          const left = Math.floor(Math.random() * maxX);
+          const top = Math.floor(Math.random() * maxY);
+
+          noBtn.style.left = `${left}px`;
+          noBtn.style.top = `${top}px`;
+        }
+
+        noBtn.addEventListener("mouseenter", moveNo);
+        noBtn.addEventListener("touchstart", moveNo, { passive: true });
+
+        yesBtn.addEventListener("click", () => {
+          msg.textContent = "YAY!!! 💘🥰";
+          celebrate.style.display = "block";
+          yesBtn.style.display = "none";
+          noBtn.style.display = "none";
+        });
+
+        moveNo();
+      }
+    </script>
+  </body>
+</html>
